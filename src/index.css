@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 블러 스포트라이트 전용 스타일 */
+.spotlight {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(48px);
+  opacity: 0.9;
+  mix-blend-mode: screen;
+}
+
+.spotlight-1 {
+  width: 20rem;
+  height: 20rem;
+  background: rgba(56, 189, 248, 0.4); /* sky-400-ish */
+  top: -8rem;
+  left: -8rem;
+  animation: spotlight-orbit-1 18s ease-in-out infinite alternate;
+}
+
+.spotlight-2 {
+  width: 24rem;
+  height: 24rem;
+  background: rgba(168, 85, 247, 0.35); /* purple-500-ish */
+  top: 35%;
+  right: -10rem;
+  animation: spotlight-orbit-2 22s ease-in-out infinite alternate;
+}
+
+.spotlight-3 {
+  width: 24rem;
+  height: 24rem;
+  background: rgba(52, 211, 153, 0.3); /* emerald-400-ish */
+  bottom: -10rem;
+  left: 20%;
+  animation: spotlight-orbit-3 20s ease-in-out infinite alternate;
+}
+
+@keyframes spotlight-orbit-1 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(40px, 30px, 0) scale(1.1);
+  }
+  100% {
+    transform: translate3d(-30px, -10px, 0) scale(0.95);
+  }
+}
+
+@keyframes spotlight-orbit-2 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  40% {
+    transform: translate3d(-50px, -40px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(30px, 20px, 0) scale(0.9);
+  }
+}
+
+@keyframes spotlight-orbit-3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-25px, 20px, 0) scale(1.08);
+  }
+  100% {
+    transform: translate3d(40px, -20px, 0) scale(0.92);
+  }
+}
