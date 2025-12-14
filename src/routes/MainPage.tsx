@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LiquidGlass } from '@liquidglass/react'
 
 function MainPage() {
+  const navigate = useNavigate()
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
@@ -130,11 +132,14 @@ function MainPage() {
               blur={0.9}
               contrast={1.2}
               saturation={1.2}
-              className='bg-white/15'
+              className='bg-white/15 cursor-pointer'
             >
-              <div className="h-full flex flex-col items-center justify-center gap-2">
+              <button
+                onClick={() => navigate('/form')}
+                className="h-full w-full flex flex-col items-center justify-center gap-2 text-white font-semibold"
+              >
                 신청하기
-              </div>
+              </button>
             </LiquidGlass>
           </div>
         </div>
