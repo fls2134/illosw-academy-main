@@ -1,1 +1,1 @@
-{"root":["./src/app.tsx","./src/main.tsx","./src/routes/formpage.tsx","./src/routes/mainpage.tsx"],"version":"5.9.3"}
+{"root":["./src/app.tsx","./src/images.d.ts","./src/main.tsx","./src/routes/formpage.tsx","./src/routes/mainpage.tsx"],"version":"5.9.3"}
