@@ -1,7 +1,7 @@
 import React from "react";
 import { FiAlertTriangle } from "react-icons/fi";
 import { HiOutlineComputerDesktop } from "react-icons/hi2";
-import logo from "../assets/img/logo.svg";
+import Footer from "../components/Footer";
 
 function UnderConstruction() {
   return (
@@ -43,21 +43,10 @@ function UnderConstruction() {
             </div>
           </div>
         </div>
-
-        {/* 로고 및 회사명 */}
-        <div className="flex flex-row items-center justify-center gap-2 sm:gap-3">
-          <img
-            src={logo}
-            alt="로고"
-            className="w-8 sm:w-10 h-auto"
-            style={{
-              filter:
-                "brightness(0) saturate(100%) invert(45%) sepia(8%) saturate(750%) hue-rotate(180deg) brightness(95%) contrast(88%)",
-            }}
-          />
-          <p className="text-xs sm:text-sm text-slate-500">illo sw academy</p>
-        </div>
       </div>
+
+      {/* Footer */}
+      <Footer />
     </div>
   );
 }
