@@ -4,8 +4,6 @@ import { HiArrowRight, HiCheckCircle, HiInformationCircle } from "react-icons/hi
 import Header from "../components/Header";
 import { formatPhoneNumber } from "../utils/formatPhone";
 import { useJsonp } from "../hooks/useJsonp";
-import { useCountUp } from "../hooks/useCountUp";
-import { useScrollReveal } from "../hooks/useScrollReveal";
 import {
   GOOGLE_SCRIPT_URL,
   COMPANY_NAME,
@@ -43,13 +41,6 @@ import location from "../assets/img/location.png";
 function MainPage() {
   const navigate = useNavigate();
   const { fetchJsonp } = useJsonp();
-  
-  // Number counter for "9년"
-  const { count: yearsCount, ref: yearsRef } = useCountUp(9, 2000);
-  
-  // Image reveals (only for academy images)
-  const academy1Reveal = useScrollReveal(0.2, 0);
-  const academy2Reveal = useScrollReveal(0.2, 100);
   
   const [formData, setFormData] = useState({
     name: "",
@@ -565,9 +556,9 @@ function MainPage() {
                     대표이자 AI 석사 학위를 보유한 대표 원장이 직접 지도합니다.
                   </p>
                   <ul className="space-y-3 text-sm text-slate-500 leading-relaxed">
-                    <li ref={yearsRef as React.RefObject<HTMLLIElement>}>
+                    <li>
                       • 2017년부터의 코딩 강의 경력 (
-                      <span className="font-bold text-green-600 text-base">{yearsCount}년</span>
+                      <span className="font-bold text-green-600 text-base">9년</span>
                       )
                     </li>
                     <li>• 대치동 코딩학원 및 대형 학원 강사 경력</li>
@@ -711,12 +702,7 @@ function MainPage() {
             </div>
             
             <div className="grid grid-cols-2 gap-2 md:gap-6 max-w-3xl mx-auto">
-              <div 
-                ref={academy1Reveal.ref as React.RefObject<HTMLDivElement>}
-                className={`rounded-lg overflow-hidden shadow-md transition-all duration-700 ${
-                  academy1Reveal.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
-                }`}
-              >
+              <div className="rounded-lg overflow-hidden shadow-md">
                 <img
                   src={academy1}
                   alt={`${COMPANY_NAME} 강의실 내부 1`}
@@ -724,12 +710,7 @@ function MainPage() {
                   loading="lazy"
                 />
               </div>
-              <div 
-                ref={academy2Reveal.ref as React.RefObject<HTMLDivElement>}
-                className={`rounded-lg overflow-hidden shadow-md transition-all duration-700 ${
-                  academy2Reveal.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
-                }`}
-              >
+              <div className="rounded-lg overflow-hidden shadow-md">
                 <img
                   src={academy2}
                   alt={`${COMPANY_NAME} 강의실 내부 2`}
