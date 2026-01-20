@@ -6,7 +6,7 @@ export const JSONP_TIMEOUT = 10000; // 10초
 
 // 회사 정보
 export const COMPANY_NAME =
-  (import.meta as any).env?.VITE_COMPANY_NAME || "일로 SW 입시센터";
+  (import.meta as any).env?.VITE_COMPANY_NAME || "일로 SW 입시 연구소";
 
 export const COMPANY_NAME_EN =
   (import.meta as any).env?.VITE_COMPANY_NAME_EN || "illo sw academy";

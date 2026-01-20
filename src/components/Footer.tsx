@@ -20,7 +20,7 @@ function Footer() {
             <div className="flex flex-row items-center gap-2">
               <img
                 src={logo}
-                alt="일로 SW 입시센터 로고"
+                alt={`${COMPANY_NAME} 로고`}
                 className="w-6 sm:w-7 h-auto"
                 style={{
                   filter: "brightness(0) invert(1)",

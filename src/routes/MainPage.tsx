@@ -482,7 +482,7 @@ function MainPage() {
                 <div className="prose prose-slate max-w-none text-left space-y-6">
                   <p className="text-sm md:text-lg text-slate-700 leading-relaxed">
                     <span className="text-2xl mr-2">🏫</span>
-                    일로 SW 입시센터는 2025년 12월 1일 설립된 SW 입시 전문 교육
+                    {COMPANY_NAME}는 2025년 12월 1일 설립된 SW 입시 전문 교육
                     기관입니다.
                   </p>
                   <p className="text-sm md:text-lg text-slate-700 leading-relaxed">
@@ -493,7 +493,7 @@ function MainPage() {
                   </p>
                   <p className="text-sm md:text-lg text-slate-700 leading-relaxed">
                     <span className="text-2xl mr-2">👨‍💼</span>
-                    대형 IT 입시센터 출신 원장의 실제 입시 사례와 교육 노하우를
+                    대형 IT 입시 학원 출신 원장의 실제 입시 사례와 교육 노하우를
                     바탕으로 학생 개개인에게 가장 합리적이고 효율적인 학습
                     전략을 제시합니다.
                   </p>
@@ -504,7 +504,7 @@ function MainPage() {
               <div className="bg-slate-50 rounded-lg p-6 md:p-8 border border-slate-200">
                 <div className="prose prose-slate max-w-none text-left space-y-6">
                   <p className="text-xs md:text-lg text-slate-900 font-semibold leading-relaxed">
-                    일로 SW 입시센터는 광명시 전역의
+                    {COMPANY_NAME}는 광명시 전역의
                   </p>
                   <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     <li className="flex items-center gap-2 text-slate-700">
@@ -532,7 +532,7 @@ function MainPage() {
             </div>
 
             <h3 className="text-lg md:text-3xl font-bold mb-8 text-center bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
-              일로 SW 입시센터만의 압도적인 강점
+              {COMPANY_NAME}만의 압도적인 강점
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -541,7 +541,7 @@ function MainPage() {
                 <div className="h-32 w-full overflow-hidden">
                   <img
                     src={profit1}
-                    alt="일로 SW 입시센터 전문성과 현장 경험을 겸비한 대표 원장 직강"
+                    alt={`${COMPANY_NAME} 전문성과 현장 경험을 겸비한 대표 원장 직강`}
                     className="w-full h-full object-cover"
                     loading="lazy"
                   />
@@ -552,7 +552,7 @@ function MainPage() {
                     전문성과 현장 경험을 겸비한 대표 원장 직강
                   </h4>
                   <p className="text-slate-700 mb-6 leading-loose">
-                    일로 SW 입시센터의 모든 수업은 현직 IT 스타트업 개발사
+                    {COMPANY_NAME}의 모든 수업은 현직 IT 스타트업 개발사
                     대표이자 AI 석사 학위를 보유한 대표 원장이 직접 지도합니다.
                   </p>
                   <ul className="space-y-3 text-sm text-slate-500 leading-relaxed">
@@ -584,7 +584,7 @@ function MainPage() {
                     학습 효과를 극대화하는 소수 정예 집중 관리
                   </h4>
                   <p className="text-slate-700 mb-6 leading-loose">
-                    일로 SW 입시센터는 3명 이내의 극소수 정예 그룹 수업만을
+                    {COMPANY_NAME}는 3명 이내의 극소수 정예 그룹 수업만을
                     운영합니다.
                   </p>
                   <ul className="space-y-3 text-sm text-slate-500 leading-relaxed">
@@ -645,7 +645,7 @@ function MainPage() {
 
             <div className="mt-12 text-center space-y-6">
               <p className="text-sm md:text-lg text-slate-700 leading-relaxed">
-                일로 SW 입시센터는 단순히 SW 지식을 전달하는 학원이 아닙니다.
+                {COMPANY_NAME}는 단순히 SW 지식을 전달하는 학원이 아닙니다.
               </p>
               <p className="text-sm md:text-lg text-slate-700 leading-relaxed">
                 학생의 현재 위치의 정확한 진단을 통해 가장 합리적인 전략을
@@ -659,7 +659,7 @@ function MainPage() {
                 전략이 다르면, 결과는 달라집니다.
               </p>
               <p className="text-base md:text-xl font-bold bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
-                일로 SW 입시센터가 그 차이를 만듭니다.
+                {COMPANY_NAME}가 그 차이를 만듭니다.
               </p>
             </div>
             </div>
