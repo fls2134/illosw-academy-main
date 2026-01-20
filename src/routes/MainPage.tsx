@@ -544,6 +544,7 @@ function MainPage() {
                     alt={`${COMPANY_NAME} 전문성과 현장 경험을 겸비한 대표 원장 직강`}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-6">
@@ -576,6 +577,7 @@ function MainPage() {
                     alt={`${COMPANY_NAME} 소수 정예 집중 관리 수업 환경`}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-6">
@@ -604,6 +606,7 @@ function MainPage() {
                     alt={`${COMPANY_NAME} 실전 개발력 향상을 위한 특강 프로그램`}
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="p-6">
@@ -708,6 +711,7 @@ function MainPage() {
                   alt={`${COMPANY_NAME} 강의실 내부 1`}
                   className="w-full h-auto object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div className="rounded-lg overflow-hidden shadow-md">
@@ -716,6 +720,7 @@ function MainPage() {
                   alt={`${COMPANY_NAME} 강의실 내부 2`}
                   className="w-full h-auto object-cover"
                   loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>
