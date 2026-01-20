@@ -4,6 +4,8 @@ import { HiArrowRight, HiCheckCircle, HiInformationCircle } from "react-icons/hi
 import Header from "../components/Header";
 import { formatPhoneNumber } from "../utils/formatPhone";
 import { useJsonp } from "../hooks/useJsonp";
+import { useCountUp } from "../hooks/useCountUp";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 import {
   GOOGLE_SCRIPT_URL,
   COMPANY_NAME,
@@ -41,6 +43,14 @@ import location from "../assets/img/location.png";
 function MainPage() {
   const navigate = useNavigate();
   const { fetchJsonp } = useJsonp();
+  
+  // Number counter for "9년"
+  const { count: yearsCount, ref: yearsRef } = useCountUp(9, 2000);
+  
+  // Image reveals (only for academy images)
+  const academy1Reveal = useScrollReveal(0.2, 0);
+  const academy2Reveal = useScrollReveal(0.2, 100);
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -373,7 +383,7 @@ function MainPage() {
           ref={(el) => {
             sectionsRef.current["hero"] = el;
           }}
-          className="min-h-screen flex items-center justify-center pt-20 md:pt-24 px-4 relative bg-white"
+          className="min-h-screen flex items-end md:items-center pt-20 md:pt-24 pb-12 md:pb-0 px-6 md:px-12 lg:px-20 relative bg-slate-900"
           style={{
             backgroundImage: `url(${hero})`,
             backgroundSize: "cover",
@@ -383,75 +393,76 @@ function MainPage() {
           role="img"
           aria-label={`${COMPANY_NAME} Hero Section 배경`}
         >
-          {/* 라이트 오버레이 */}
-          <div className="absolute inset-0 bg-white/65 backdrop-blur-md"></div>
+          {/* 다크 오버레이 - 좌우 그라데이션 */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent"></div>
           
-          <div className="max-w-4xl mx-auto text-center relative z-10">
-            <div className="flex flex-col items-center gap-8 md:gap-12 mb-8 md:mb-12 animate-fade-in">
-              <img
-                src={logo}
-                alt={`${COMPANY_NAME} 로고`}
-                className="w-8 h-8 md:w-16 md:h-16"
-                style={{
-                  filter: "brightness(0) saturate(100%) invert(10%) sepia(10%) saturate(200%) hue-rotate(180deg) brightness(90%) contrast(80%)",
-                }}
-              />
-              <h1 className="text-2xl md:text-5xl lg:text-6xl font-bold text-slate-900 drop-shadow-sm">
+          {/* 상단 그라데이션 - 헤더 가독성 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent"></div>
+          
+          <div className="max-w-7xl w-full relative z-10">
+            <div className="max-w-2xl">
+              {/* 큰 타이틀 */}
+              <h1 className="text-2xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 md:mb-8 leading-tight animate-fade-in">
                 {COMPANY_NAME}
               </h1>
-            </div>
-            <p className="text-base md:text-2xl text-slate-800 mb-12 md:mb-16 animate-fade-in-delay drop-shadow-sm">
-              같은 등급에도 다른 결과를 만드는 전략의 차이
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-delay-2">
-              <button
-                onClick={() => {
-                  const element = document.getElementById("curriculum");
-                  if (element) {
-                    const headerHeight = 80;
-                    window.scrollTo({
-                      top: element.offsetTop - headerHeight,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                className="px-8 py-3 bg-white text-slate-900 rounded-lg font-medium hover:bg-slate-100 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                aria-label="커리큘럼 섹션으로 이동"
-              >
-                커리큘럼
-              </button>
-              <button
-                onClick={() => {
-                  const element = document.getElementById("apply");
-                  if (element) {
-                    const headerHeight = 80;
-                    window.scrollTo({
-                      top: element.offsetTop - headerHeight,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                className="px-8 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                aria-label="강의 신청 섹션으로 이동"
-              >
-                강의 신청
-              </button>
-              <button
-                onClick={() => {
-                  const element = document.getElementById("inquiry");
-                  if (element) {
-                    const headerHeight = 80;
-                    window.scrollTo({
-                      top: element.offsetTop - headerHeight,
-                      behavior: "smooth",
-                    });
-                  }
-                }}
-                className="px-8 py-3 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600 transition-colors shadow-lg focus:outline-none focus:ring-2 focus:ring-green-500"
-                aria-label="상담 문의 섹션으로 이동"
-              >
-                상담 문의
-              </button>
+              
+              {/* 서브타이틀 */}
+              <p className="text-lg md:text-2xl text-white/90 mb-12 md:mb-16 font-medium leading-relaxed animate-fade-in-delay">
+                같은 등급에도 다른 결과를 만드는<br className="md:hidden" />
+                <span className="text-green-400 font-bold"> 전략의 차이</span>
+              </p>
+              
+              {/* 버튼 */}
+              <div className="flex flex-col sm:flex-row gap-3 animate-fade-in-delay-2">
+                <button
+                  onClick={() => {
+                    const element = document.getElementById("curriculum");
+                    if (element) {
+                      const headerHeight = 80;
+                      window.scrollTo({
+                        top: element.offsetTop - headerHeight,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="px-5 py-2.5 md:px-8 md:py-4 bg-white/10 backdrop-blur-sm text-white rounded-lg font-bold text-sm md:text-lg hover:bg-white/20 transition-all shadow-lg focus:outline-none focus:ring-2 focus:ring-white/50 border border-white/30 hover:scale-105"
+                  aria-label="커리큘럼 섹션으로 이동"
+                >
+                  커리큘럼
+                </button>
+                <button
+                  onClick={() => {
+                    const element = document.getElementById("apply");
+                    if (element) {
+                      const headerHeight = 80;
+                      window.scrollTo({
+                        top: element.offsetTop - headerHeight,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="px-5 py-2.5 md:px-8 md:py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-bold text-sm md:text-lg hover:from-green-600 hover:to-emerald-600 transition-all shadow-2xl focus:outline-none focus:ring-2 focus:ring-green-400 hover:scale-105 hover:shadow-green-500/50"
+                  aria-label="강의 신청 섹션으로 이동"
+                >
+                  강의 신청
+                </button>
+                <button
+                  onClick={() => {
+                    const element = document.getElementById("inquiry");
+                    if (element) {
+                      const headerHeight = 80;
+                      window.scrollTo({
+                        top: element.offsetTop - headerHeight,
+                        behavior: "smooth",
+                      });
+                    }
+                  }}
+                  className="px-5 py-2.5 md:px-8 md:py-4 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-lg font-bold text-sm md:text-lg hover:from-green-600 hover:to-emerald-600 transition-all shadow-2xl focus:outline-none focus:ring-2 focus:ring-green-400 hover:scale-105 hover:shadow-green-500/50"
+                  aria-label="상담 문의 섹션으로 이동"
+                >
+                  상담 문의
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -469,7 +480,7 @@ function MainPage() {
               <div className="text-sm md:text-lg text-slate-500 font-normal mb-2">
                 같은 등급에도 다른 결과를 만드는
               </div>
-              <div className="text-xl md:text-4xl font-bold text-slate-900">
+              <div className="text-xl md:text-4xl font-bold bg-gradient-to-r from-green-400 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
                 전략의 차이
               </div>
             </h2>
@@ -529,7 +540,7 @@ function MainPage() {
               </div>
             </div>
 
-            <h3 className="text-lg md:text-3xl font-bold text-slate-900 mb-8 text-center">
+            <h3 className="text-lg md:text-3xl font-bold mb-8 text-center bg-gradient-to-r from-orange-500 via-amber-500 to-yellow-500 bg-clip-text text-transparent">
               일로 SW 입시센터만의 압도적인 강점
             </h3>
 
@@ -554,7 +565,11 @@ function MainPage() {
                     대표이자 AI 석사 학위를 보유한 대표 원장이 직접 지도합니다.
                   </p>
                   <ul className="space-y-3 text-sm text-slate-500 leading-relaxed">
-                    <li>• 2017년부터의 코딩 강의 경력 (9년)</li>
+                    <li ref={yearsRef as React.RefObject<HTMLLIElement>}>
+                      • 2017년부터의 코딩 강의 경력 (
+                      <span className="font-bold text-green-600 text-base">{yearsCount}년</span>
+                      )
+                    </li>
                     <li>• 대치동 코딩학원 및 대형 학원 강사 경력</li>
                     <li>• 입시와 교육 현장을 모두 경험한 실무형 교육자</li>
                     <li>• 실제 개발사 운영으로 최신 기술 트렌드 반영</li>
@@ -652,7 +667,7 @@ function MainPage() {
               <p className="text-base md:text-xl font-bold text-slate-900">
                 전략이 다르면, 결과는 달라집니다.
               </p>
-              <p className="text-base md:text-xl font-bold text-green-600">
+              <p className="text-base md:text-xl font-bold bg-gradient-to-r from-green-500 via-emerald-500 to-teal-500 bg-clip-text text-transparent">
                 일로 SW 입시센터가 그 차이를 만듭니다.
               </p>
             </div>
@@ -668,7 +683,7 @@ function MainPage() {
           className="py-16 md:py-24 px-4 bg-white border-t border-slate-200"
         >
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+            <h2 className="text-xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-slate-900 to-gray-400 bg-clip-text text-transparent">
               위치
             </h2>
             
@@ -696,7 +711,12 @@ function MainPage() {
             </div>
             
             <div className="grid grid-cols-2 gap-2 md:gap-6 max-w-3xl mx-auto">
-              <div className="rounded-lg overflow-hidden shadow-md">
+              <div 
+                ref={academy1Reveal.ref as React.RefObject<HTMLDivElement>}
+                className={`rounded-lg overflow-hidden shadow-md transition-all duration-700 ${
+                  academy1Reveal.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
+                }`}
+              >
                 <img
                   src={academy1}
                   alt={`${COMPANY_NAME} 강의실 내부 1`}
@@ -704,7 +724,12 @@ function MainPage() {
                   loading="lazy"
                 />
               </div>
-              <div className="rounded-lg overflow-hidden shadow-md">
+              <div 
+                ref={academy2Reveal.ref as React.RefObject<HTMLDivElement>}
+                className={`rounded-lg overflow-hidden shadow-md transition-all duration-700 ${
+                  academy2Reveal.isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-4'
+                }`}
+              >
                 <img
                   src={academy2}
                   alt={`${COMPANY_NAME} 강의실 내부 2`}
@@ -725,19 +750,24 @@ function MainPage() {
           className="py-16 md:py-24 px-4 bg-slate-50 border-t border-slate-200"
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-xl md:text-4xl font-bold text-slate-900 mb-4 text-center">
+            <h2 className="text-xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-slate-900 to-gray-400 bg-clip-text text-transparent">
               커리큘럼
             </h2>
-            <p className="text-sm md:text-base text-slate-600 mb-12 text-center">
+            <p className="text-sm md:text-base text-slate-400 mb-8 text-center">
               다양한 개발 분야를 체험하고, 기초 실력을 쌓은 뒤, 심층 프로젝트로 연결하는 구조
             </p>
 
-            <div className="space-y-12">
+            <div className="relative space-y-12">
+              {/* Timeline vertical line */}
+              <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 via-green-500 via-blue-500 to-purple-500"></div>
+              
               {/* 입문 단계 */}
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-2 h-12 bg-orange-500 rounded-full"></div>
-                  <h3 className="text-lg md:text-2xl font-bold text-slate-900">
+              <div className="relative pl-16">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  1
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">
                     입문 단계 : 체험 수업 & 적성 탐구
                   </h3>
                 </div>
@@ -785,10 +815,12 @@ function MainPage() {
               </div>
 
               {/* 학습 단계 */}
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-2 h-12 bg-green-500 rounded-full"></div>
-                  <h3 className="text-lg md:text-2xl font-bold text-slate-900">
+              <div className="relative pl-16">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-green-400 to-emerald-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  2
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-green-500 to-emerald-500 bg-clip-text text-transparent">
                     학습 단계 : 기초 실력 구축
                   </h3>
                 </div>
@@ -891,10 +923,12 @@ function MainPage() {
               </div>
 
               {/* 숙련 단계 */}
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-2 h-12 bg-blue-500 rounded-full"></div>
-                  <h3 className="text-lg md:text-2xl font-bold text-slate-900">
+              <div className="relative pl-16">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  3
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                     숙련 단계 : 심층 프로젝트
                   </h3>
                 </div>
@@ -902,7 +936,7 @@ function MainPage() {
                   기초 학습이 어느 정도 완성되면 학생의 진로와 입시 방향에 맞춘 심층 프로젝트로 들어갑니다.
                 </p>
 
-                <div className="bg-blue-50 border-2 border-blue-200 rounded-lg p-6 md:p-8">
+                <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
                   <h4 className="text-base md:text-lg font-semibold text-slate-900 mb-4 flex items-center gap-2">
                     <span className="text-xl">🚀</span>
                     심층 프로젝트
@@ -932,17 +966,19 @@ function MainPage() {
               </div>
 
               {/* 비정기적 특강 */}
-              <div>
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-2 h-12 bg-pink-500 rounded-full"></div>
-                  <h3 className="text-lg md:text-2xl font-bold text-slate-900">
+              <div className="relative pl-16">
+                <div className="absolute left-0 top-2 w-12 h-12 bg-gradient-to-br from-purple-400 to-pink-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-lg">
+                  +
+                </div>
+                <div className="mb-6">
+                  <h3 className="text-lg md:text-2xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                     비정기적 특강
                   </h3>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   {/* 해커톤 */}
-                  <div className="bg-pink-50 border border-pink-200 rounded-lg p-6 shadow-sm">
+                  <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
                     <h4 className="text-base md:text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
                       <span className="text-xl">⚡</span>
                       해커톤
@@ -954,7 +990,7 @@ function MainPage() {
                   </div>
 
                   {/* 컨설팅 */}
-                  <div className="bg-pink-50 border border-pink-200 rounded-lg p-6 shadow-sm">
+                  <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
                     <h4 className="text-base md:text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
                       <span className="text-xl">📋</span>
                       컨설팅
@@ -966,7 +1002,7 @@ function MainPage() {
                   </div>
 
                   {/* 특성화고 대비 */}
-                  <div className="bg-pink-50 border border-pink-200 rounded-lg p-6 shadow-sm">
+                  <div className="bg-white rounded-lg border border-slate-200 p-6 shadow-sm">
                     <h4 className="text-base md:text-lg font-semibold text-slate-900 mb-3 flex items-center gap-2">
                       <span className="text-xl">🎓</span>
                       특성화고 대비
@@ -977,45 +1013,45 @@ function MainPage() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* 핵심 요약 */}
-              <div className="bg-slate-100 border border-slate-300 rounded-lg p-6 md:p-8">
-                <h3 className="text-lg md:text-xl font-bold text-slate-900 mb-4 text-center">
-                  일로 SW 입시 연구소 커리큘럼의 핵심
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-center">
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      1
-                    </div>
-                    <p className="text-sm md:text-base text-slate-700 font-medium">
-                      먼저 경험해보고
-                    </p>
+            {/* 핵심 요약 - 타임라인 밖으로 분리 */}
+            <div className="mt-12 bg-white border border-slate-200 rounded-xl p-8 md:p-10 shadow-sm">
+              <h3 className="text-xl md:text-2xl font-bold mb-8 text-center text-slate-900">
+                커리큘럼의 핵심
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    1
                   </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      2
-                    </div>
-                    <p className="text-sm md:text-base text-slate-700 font-medium">
-                      나에게 맞는 분야를 찾고
-                    </p>
+                  <p className="text-sm md:text-base text-slate-700 leading-relaxed pt-1">
+                    먼저 경험해보고
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    2
                   </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      3
-                    </div>
-                    <p className="text-sm md:text-base text-slate-700 font-medium">
-                      체계적으로 실력을 쌓아
-                    </p>
+                  <p className="text-sm md:text-base text-slate-700 leading-relaxed pt-1">
+                    나에게 맞는 분야를 찾고
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    3
                   </div>
-                  <div className="flex flex-col items-center gap-2">
-                    <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-lg">
-                      4
-                    </div>
-                    <p className="text-sm md:text-base text-slate-700 font-medium">
-                      입시와 연결되는 결과물까지 만든다
-                    </p>
+                  <p className="text-sm md:text-base text-slate-700 leading-relaxed pt-1">
+                    체계적으로 실력을 쌓아
+                  </p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-white font-bold">
+                    4
                   </div>
+                  <p className="text-sm md:text-base text-slate-700 leading-relaxed pt-1">
+                    입시와 연결되는 결과물까지 만든다
+                  </p>
                 </div>
               </div>
             </div>
@@ -1031,10 +1067,10 @@ function MainPage() {
           className="py-16 md:py-24 px-4 bg-white border-t border-slate-200"
         >
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+            <h2 className="text-xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-slate-900 to-gray-400 bg-clip-text text-transparent">
               강의 신청
             </h2>
-            <p className="text-sm md:text-lg text-slate-700 mb-8 text-center">
+            <p className="text-sm md:text-lg text-slate-400 mb-8 text-center">
               원하시는 시간대를 선택하여 강의를 신청해주세요
             </p>
 
@@ -1320,10 +1356,10 @@ function MainPage() {
           className="py-16 md:py-24 px-4 bg-slate-50 border-t border-slate-200"
         >
           <div className="max-w-2xl mx-auto">
-            <h2 className="text-xl md:text-4xl font-bold text-slate-900 mb-6 text-center">
+            <h2 className="text-xl md:text-4xl font-bold mb-8 text-center bg-gradient-to-r from-slate-900 to-gray-400 bg-clip-text text-transparent">
               상담 문의
             </h2>
-            <p className="text-sm md:text-lg text-slate-700 mb-8 text-center">
+            <p className="text-sm md:text-lg text-slate-400 mb-8 text-center">
               궁금한 사항이 있으시면 언제든지 문의해주세요
             </p>
 

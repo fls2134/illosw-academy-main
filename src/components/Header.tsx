@@ -28,7 +28,7 @@ function Header() {
     if (!isMainPage) return;
 
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 100);
 
       // 현재 섹션 감지
       const sections = navItems.map((item) => item.id);
@@ -94,9 +94,11 @@ function Header() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled || !isMainPage
-          ? "bg-white shadow-md"
-          : "bg-white/95 backdrop-blur-sm"
+        !isMainPage
+          ? "bg-white/80 backdrop-blur-md shadow-md"
+          : isScrolled
+          ? "bg-white/80 backdrop-blur-md shadow-md"
+          : "bg-transparent"
       }`}
     >
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -122,9 +124,11 @@ function Header() {
                 <img
                   src={logo}
                   alt={`${COMPANY_NAME} 로고`}
-                  className="w-6 sm:w-7 h-auto"
+                  className="w-6 sm:w-7 h-auto transition-all duration-300"
                   style={{
-                    filter: "brightness(0) saturate(100%) invert(10%) sepia(10%) saturate(200%) hue-rotate(180deg) brightness(90%) contrast(80%)",
+                    filter: isScrolled 
+                      ? "brightness(0) saturate(100%) invert(10%) sepia(10%) saturate(200%) hue-rotate(180deg) brightness(90%) contrast(80%)"
+                      : "brightness(0) saturate(100%) invert(100%)",
                   }}
                 />
               </button>
@@ -145,8 +149,12 @@ function Header() {
                 onClick={() => handleNavClick(item.id)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-green-500 ${
                   activeSection === item.id && isMainPage
-                    ? "bg-slate-900 text-white"
-                    : "text-slate-700 hover:bg-slate-100"
+                    ? isScrolled
+                      ? "bg-slate-900 text-white"
+                      : "bg-white/20 text-white"
+                    : isScrolled
+                    ? "text-slate-700 hover:bg-slate-100"
+                    : "text-white hover:bg-white/10"
                 }`}
                 aria-label={`${item.label} 섹션으로 이동`}
               >
@@ -158,7 +166,11 @@ function Header() {
           {/* 모바일 메뉴 버튼 */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-slate-700 hover:bg-slate-100 rounded-lg transition-colors"
+            className={`md:hidden p-2 rounded-lg transition-colors ${
+              isScrolled
+                ? "text-slate-700 hover:bg-slate-100"
+                : "text-white hover:bg-white/10"
+            }`}
             aria-label="메뉴"
           >
             {isMobileMenuOpen ? (
