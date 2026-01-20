@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import MainPage from "./routes/MainPage";
 import FormPage from "./routes/FormPage";
 import UnderConstruction from "./routes/UnderConstruction";
+import Header from "./components/Header";
 import Footer from "./components/Footer";
 import "./index.css";
 
@@ -16,14 +17,28 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-900">
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="/form" element={<FormPage />} />
-        </Routes>
-      </main>
-      <Footer />
+    <div className="min-h-screen flex flex-col bg-white">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <MainPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/form"
+          element={
+            <>
+              <Header />
+              <FormPage />
+              <Footer />
+            </>
+          }
+        />
+      </Routes>
     </div>
   );
 }

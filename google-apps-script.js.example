@@ -1,10 +1,10 @@
-const SPREADSHEET_ID = "1zEl7O5MqqLMWIcIogoWQIBpp55TxQ1rqLf72Ga4Dz10";
-const EMAIL_TO = "fls213444@gmail.com";
+const SPREADSHEET_ID = "YOUR_SPREADSHEET_ID";
+const EMAIL_TO = "YOUR_EMAIL@gmail.com";
 const SPREADSHEET_URL =
-  "https://docs.google.com/spreadsheets/d/1zEl7O5MqqLMWIcIogoWQIBpp55TxQ1rqLf72Ga4Dz10/edit?gid=1051641823#gid=1051641823";
+  "https://docs.google.com/spreadsheets/d/YOUR_SPREADSHEET_ID/edit";
 
-const COMPANY_NAME = "일로 SW 입시센터";
-const COMPANY_NAME_EN = "illo sw academy";
+const COMPANY_NAME = "YOUR_COMPANY_NAME";
+const COMPANY_NAME_EN = "YOUR_COMPANY_NAME_EN";
 
 const EMAIL_SUBJECT_INQUIRY = `[${COMPANY_NAME}] 상담 문의`;
 const EMAIL_BODY_INQUIRY_PREFIX = "새로운 상담 문의가 접수되었습니다.\n\n";

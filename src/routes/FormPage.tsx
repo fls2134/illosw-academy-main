@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { HiArrowLeft } from "react-icons/hi";
 import LoadingPage from "../components/LoadingPage";
 import { useJsonp } from "../hooks/useJsonp";
 import { GOOGLE_SCRIPT_URL } from "../constants";
 import { Class } from "../types";
+import { formatPhoneNumber } from "../utils/formatPhone";
 
 function FormPage() {
   const navigate = useNavigate();
@@ -105,6 +105,13 @@ function FormPage() {
       } else {
         setAvailableClasses([]);
       }
+    } else if (name === "number") {
+      // 전화번호 필드인 경우 자동 포맷팅
+      const formatted = formatPhoneNumber(value);
+      setFormData((prev) => ({
+        ...prev,
+        [name]: formatted,
+      }));
     } else {
       setFormData((prev) => ({
         ...prev,
@@ -181,12 +188,12 @@ function FormPage() {
 
   if (success) {
     return (
-      <div className="p-2 md:p-4 min-h-[60vh] flex items-center justify-center">
-        <div className="bg-slate-800 backdrop-blur-sm rounded-lg p-6 border border-slate-700 text-center max-w-md">
-          <p className="text-white text-lg font-medium mb-4">
+      <div className="min-h-screen bg-white pt-20 md:pt-24 flex items-center justify-center px-4">
+        <div className="bg-white rounded-lg p-6 border border-slate-200 shadow-lg text-center max-w-md">
+          <p className="text-slate-900 text-lg font-medium mb-4">
             등록이 완료되었습니다!
           </p>
-          <p className="text-slate-300 text-sm">
+          <p className="text-slate-600 text-sm">
             잠시 후 메인 페이지로 이동합니다.
           </p>
         </div>
@@ -195,40 +202,24 @@ function FormPage() {
   }
 
   return (
-    <div className="p-2 md:p-4">
-      <div className="max-w-2xl mx-auto">
-        {/* 헤더 영역 */}
-        <header className="mb-6 md:mb-8 pb-6 md:pb-8 border-b border-slate-700/50">
-          <div className="flex items-center gap-3">
-            {/* 뒤로가기 버튼 */}
-            <button
-              onClick={() => navigate("/")}
-              className="flex items-center justify-center w-8 h-8 text-slate-300 hover:text-white transition-colors group"
-            >
-              <HiArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-            </button>
-            <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white">
-              강의 신청
-            </h1>
-          </div>
-        </header>
-
+    <div className="min-h-screen bg-white pt-20 md:pt-24">
+      <div className="max-w-2xl mx-auto px-4 md:px-6 py-8">
         {/* Description */}
-        <p className="text-sm md:text-base text-slate-400 mb-6 md:mb-8">
+        <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-8">
           원하시는 강의를 선택하고 정보를 입력해주세요
         </p>
 
         {error && (
-          <div className="bg-red-500/20 border border-red-500/50 text-red-200 rounded-lg p-4 mb-6">
+          <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-6">
             {error}
           </div>
         )}
 
-        <div className="bg-slate-800 backdrop-blur-sm rounded-lg p-4 md:p-6 border border-slate-700">
+        <div className="bg-white border border-slate-200 rounded-lg p-4 md:p-6 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                이름
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                이름 <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -236,14 +227,15 @@ function FormPage() {
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                className="w-full bg-white border border-slate-300 rounded-lg px-4 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
                 placeholder="이름을 입력해주세요"
+                aria-label="이름 입력"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                전화번호
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                전화번호 <span className="text-red-500">*</span>
               </label>
               <input
                 type="tel"
@@ -251,14 +243,16 @@ function FormPage() {
                 value={formData.number}
                 onChange={handleChange}
                 required
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                placeholder="전화번호를 입력해주세요"
+                maxLength={13}
+                className="w-full bg-white border border-slate-300 rounded-lg px-4 py-2 text-slate-900 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                placeholder="010-0000-0000"
+                aria-label="전화번호 입력"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                카테고리 선택
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                카테고리 선택 <span className="text-red-500">*</span>
               </label>
               <select
                 name="category"
@@ -266,7 +260,8 @@ function FormPage() {
                 onChange={handleChange}
                 required
                 disabled={classSerial !== null}
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-white border border-slate-300 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="카테고리 선택"
               >
                 <option value="">선택해주세요</option>
                 {categories.map((category) => (
@@ -278,8 +273,8 @@ function FormPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-300 mb-2">
-                클래스 선택
+              <label className="block text-sm font-medium text-slate-700 mb-2">
+                클래스 선택 <span className="text-red-500">*</span>
               </label>
               <select
                 name="class_serial"
@@ -290,7 +285,8 @@ function FormPage() {
                   !formData.category ||
                   (classSerial !== null && availableClasses.length === 1)
                 }
-                className="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-white border border-slate-300 rounded-lg px-4 py-2 text-slate-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed"
+                aria-label="클래스 선택"
               >
                 <option value="">선택해주세요</option>
                 {availableClasses.map((classItem) => (
@@ -300,12 +296,12 @@ function FormPage() {
                 ))}
               </select>
               {!formData.category && (
-                <p className="mt-2 text-xs text-slate-400">
+                <p className="mt-2 text-xs text-slate-500">
                   먼저 카테고리를 선택해주세요.
                 </p>
               )}
               {classSerial !== null && availableClasses.length === 1 && (
-                <p className="mt-2 text-xs text-slate-400">
+                <p className="mt-2 text-xs text-slate-500">
                   운영 중인 클래스가 선택되어 있습니다.
                 </p>
               )}
@@ -314,15 +310,16 @@ function FormPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors"
+              className="w-full bg-green-500 hover:bg-green-600 disabled:bg-green-500/50 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-green-500"
+              aria-label={submitting ? "제출 중" : "제출하기"}
             >
               {submitting ? "제출 중..." : "제출하기"}
             </button>
 
             {/* 안내 메시지 */}
-            <div className="pt-4 border-t border-slate-700">
-              <p className="text-sm text-slate-300 text-center leading-relaxed">
-                <span className="font-semibold text-green-400">
+            <div className="pt-4 border-t border-slate-200">
+              <p className="text-sm text-slate-600 text-center leading-relaxed">
+                <span className="font-semibold text-green-600">
                   신청 후 2영업일 안으로
                 </span>
                 <br />

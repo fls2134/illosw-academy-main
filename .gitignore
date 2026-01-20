@@ -6,6 +6,9 @@ dist
 .env
 .env.*
 
+# Google Apps Script 실제 설정 파일
+google-apps-script.js
+
 # 로그 / 캐시
 npm-debug.log*
 yarn-debug.log*
