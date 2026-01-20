@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /form
+
+Sitemap: https://illo-sw-academy.cloud/sitemap.xml
+
