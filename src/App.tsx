@@ -18,7 +18,7 @@ function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
-      <Routes>
+    <Routes>
         <Route
           path="/"
           element={
@@ -38,7 +38,7 @@ function App() {
             </>
           }
         />
-      </Routes>
+    </Routes>
     </div>
   );
 }

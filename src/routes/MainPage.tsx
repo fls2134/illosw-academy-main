@@ -42,6 +42,9 @@ function MainPage() {
   const navigate = useNavigate();
   const { fetchJsonp } = useJsonp();
   
+  // 경력 년수 계산 (2017년부터)
+  const experienceYears = new Date().getFullYear() - 2017;
+  
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -559,7 +562,7 @@ function MainPage() {
                   <ul className="space-y-3 text-sm text-slate-500 leading-relaxed">
                     <li>
                       • 2017년부터의 코딩 강의 경력 (
-                      <span className="font-bold text-green-600 text-base">9년</span>
+                      <span className="font-bold text-green-600 text-base">{experienceYears}년</span>
                       )
                     </li>
                     <li>• 대치동 코딩학원 및 대형 학원 강사 경력</li>
