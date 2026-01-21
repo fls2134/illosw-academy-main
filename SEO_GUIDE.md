@@ -158,14 +158,17 @@ https://searchadvisor.naver.com/
 ### 필수 (현재 가능)
 - [x] 메타 태그 및 SEO 설정 완료
 - [x] robots.txt, sitemap.xml 생성
-- [ ] Google Search Console 등록
+- [x] Google Search Console 등록
+- [x] 이미지 최적화 (95% 용량 감소)
 - [ ] Google에 sitemap.xml 제출
+- [ ] Google Analytics 연결 (선택)
 
 ### 선택 사항
-- [ ] Open Graph 이미지 추가 (`public/og-image.jpg`, 1200x630px)
+- [x] Open Graph 이미지 추가 (og-image.png)
 
 ### 커스텀 도메인 구매 후 가능
-- [ ] 커스텀 도메인 구매 및 연결
+- [x] 커스텀 도메인 구매 및 연결 (illo-sw-academy.cloud)
+- [x] HTTPS 인증서 발급
 - [ ] Naver Search Advisor 등록
 - [ ] Naver에 sitemap.xml 제출
 - [ ] Naver Place 등록
