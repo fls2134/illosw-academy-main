@@ -31,14 +31,27 @@ html {
   scroll-behavior: smooth;
 }
 
-/* 섹션 진입 애니메이션을 위한 기본 스타일 */
-section {
+/*
+  전역 section 숨김(opacity:0)은 커리큘럼/폼 등 모든 페이지를 "DOM은 있는데 안 보이는" 상태로 만듭니다.
+  필요하면 특정 컴포넌트에서 `.reveal-section` + `.visible`을 붙여서만 사용하세요.
+*/
+.reveal-section {
   opacity: 0;
   transform: translateY(30px);
   transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-section.visible {
+.reveal-section.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* 스크롤바 숨기기 (탭 네비게이션용) */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

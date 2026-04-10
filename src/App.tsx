@@ -1,6 +1,12 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import MainPage from "./routes/MainPage";
 import FormPage from "./routes/FormPage";
+import CurriculumPage from "./routes/CurriculumPage";
+import CurriculumDefaultPage from "./routes/CurriculumDefaultPage";
+import AboutPage from "./routes/AboutPage";
+import LocationPage from "./routes/LocationPage";
+import ApplyPage from "./routes/ApplyPage";
+import InquiryPage from "./routes/InquiryPage";
 import UnderConstruction from "./routes/UnderConstruction";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -24,6 +30,78 @@ function App() {
           element={
             <>
               <MainPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/about"
+          element={
+            <>
+              <Header />
+              <AboutPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/location"
+          element={
+            <>
+              <Header />
+              <LocationPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/curriculum"
+          element={
+            <>
+              <Header />
+              <CurriculumDefaultPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/curriculum/입문"
+          element={<Navigate to="/curriculum/비기너" replace />}
+        />
+        <Route
+          path="/curriculum/학습"
+          element={<Navigate to="/curriculum/주니어" replace />}
+        />
+        <Route
+          path="/curriculum/숙련"
+          element={<Navigate to="/curriculum/시니어" replace />}
+        />
+        <Route
+          path="/curriculum/:stage"
+          element={
+            <>
+              <Header />
+              <CurriculumPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/apply"
+          element={
+            <>
+              <Header />
+              <ApplyPage />
+              <Footer />
+            </>
+          }
+        />
+        <Route
+          path="/inquiry"
+          element={
+            <>
+              <Header />
+              <InquiryPage />
               <Footer />
             </>
           }

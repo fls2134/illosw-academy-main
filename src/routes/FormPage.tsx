@@ -188,7 +188,7 @@ function FormPage() {
 
   if (success) {
     return (
-      <div className="min-h-screen bg-white pt-20 md:pt-24 flex items-center justify-center px-4">
+      <div className="min-h-screen bg-white pt-40 flex items-center justify-center px-4">
         <div className="bg-white rounded-lg p-6 border border-slate-200 shadow-lg text-center max-w-md">
           <p className="text-slate-900 text-lg font-medium mb-4">
             등록이 완료되었습니다!
@@ -202,7 +202,7 @@ function FormPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pt-20 md:pt-24">
+    <div className="min-h-screen bg-white pt-40">
       <div className="max-w-2xl mx-auto px-4 md:px-6 py-8">
         {/* Description */}
         <p className="text-sm md:text-base text-slate-600 mb-6 md:mb-8">
