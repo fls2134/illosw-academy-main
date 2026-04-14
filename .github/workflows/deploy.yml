@@ -36,6 +36,9 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Ensure SPA fallback for direct refresh
+        run: cp dist/index.html dist/404.html
+
       - name: Verify build output
         run: |
           echo "Build output contents:"
