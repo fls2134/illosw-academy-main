@@ -178,10 +178,10 @@ function MainPage() {
               </div>
               <h1 className="leading-tight">
                 <div className="text-xl md:text-3xl text-slate-600 font-normal mb-4">
-                  같은 등급에도 다른 결과를 만드는
+                  같은 등급에도 다른 결과로 향하는
                 </div>
                 <div className="text-3xl md:text-6xl text-green-600 font-bold">
-                  전략의 차이
+                  단 하나의 길(一路)
                 </div>
               </h1>
             </div>
@@ -381,12 +381,13 @@ function MainPage() {
               </h2>
               <div className="space-y-2 text-sm leading-snug text-slate-200 md:text-base md:leading-relaxed">
                 <p>
-                  프로그래밍은 문제를 정의하고 해결 절차를 설계하는 사고 훈련으로
-                  논리적 사고와 문제 해결 능력을 키우는 데 효과적입니다.
+                  프로그래밍은 문제를 정의하고 해결 절차를 설계하는 사고
+                  훈련으로 논리적 사고와 문제 해결 능력을 키우는 데
+                  효과적입니다.
                 </p>
                 <p>
-                  또한 생성된 결과물을 통해 생활기록부에 적용하기 용이하며 수시에
-                  있어 유리한 지점 확보가 가능합니다.
+                  또한 생성된 결과물을 통해 생활기록부에 적용하기 용이하며
+                  수시에 있어 유리한 지점 확보가 가능합니다.
                 </p>
               </div>
             </div>
