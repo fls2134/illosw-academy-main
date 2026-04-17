@@ -25,6 +25,17 @@ function LocationPage() {
       </div>
 
       <div className="max-w-4xl mx-auto px-4 py-16">
+        <div className="mx-auto mb-8 max-w-3xl rounded-lg border border-slate-200 bg-slate-50 p-5 md:p-6">
+          <p className="text-sm leading-relaxed text-slate-700 md:text-base">
+            {COMPANY_NAME}는 광명, 하안, 철산, 소하 지역에서 코딩학원을 찾는
+            학생·학부모가 편하게 방문할 수 있도록 접근성 좋은 위치에서 운영되고
+            있습니다.
+          </p>
+          <p className="mt-3 text-sm leading-relaxed text-slate-700 md:text-base">
+            상담 예약 후 방문하시면 진로 목표와 현재 학습 수준을 기준으로 맞춤형
+            커리큘럼을 안내해 드립니다.
+          </p>
+        </div>
         <div className="mb-8 flex justify-center">
           <div className="relative w-full max-w-3xl">
             <img
@@ -47,7 +58,7 @@ function LocationPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="grid grid-cols-2 gap-2 md:gap-6 max-w-3xl mx-auto">
           <div className="rounded-lg overflow-hidden shadow-md">
             <img
