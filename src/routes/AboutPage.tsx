@@ -203,7 +203,7 @@ function AboutPage() {
                 </p>
                 <ul className="space-y-3 text-sm leading-relaxed text-slate-500">
                   <li>• 주 1회 수업, 회당 120분 집중 수업</li>
-                  <li>• 학생별 이해도·목표에 맞춘 1:1 수준의 관리</li>
+                  <li>• 학생별 이해도·목표에 맞춘 밀착 관리</li>
                   <li>• github 관리로 보이는 프로젝트 결과물</li>
                   <li>• 수업 이해도 저하 방지, 학습 누락 최소화</li>
                 </ul>
