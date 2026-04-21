@@ -41,3 +41,9 @@ export interface SelectedTimeSlot {
   time: string;
 }
 
+/** calendar 시트 JSONP 응답 행 — open: 1 운영, 0 휴무 */
+export interface CalendarDayRow {
+  date: string;
+  open: number;
+}
+

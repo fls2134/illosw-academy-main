@@ -177,6 +177,114 @@ function getStudents() {
   }
 }
 
+function padCalendarMonthDay_(n) {
+  var v = Number(n);
+  return v < 10 ? "0" + v : String(v);
+}
+
+/**
+ * 시트/표시값을 YYYY-MM-DD로 통일 (Date 객체, "2026. 4. 1" 형식 등)
+ */
+function formatCalendarDateKey_(cell) {
+  if (cell instanceof Date && !isNaN(cell.getTime())) {
+    return (
+      cell.getFullYear() +
+      "-" +
+      padCalendarMonthDay_(cell.getMonth() + 1) +
+      "-" +
+      padCalendarMonthDay_(cell.getDate())
+    );
+  }
+  var s = String(cell).trim();
+  if (!s) {
+    return null;
+  }
+  var m = s.match(/^(\d{4})\.\s*(\d{1,2})\.\s*(\d{1,2})/);
+  if (m) {
+    return (
+      m[1] + "-" + padCalendarMonthDay_(m[2]) + "-" + padCalendarMonthDay_(m[3])
+    );
+  }
+  var d = new Date(s);
+  if (!isNaN(d.getTime())) {
+    return (
+      d.getFullYear() +
+      "-" +
+      padCalendarMonthDay_(d.getMonth() + 1) +
+      "-" +
+      padCalendarMonthDay_(d.getDate())
+    );
+  }
+  return null;
+}
+
+/**
+ * calendar 시트: 1행 date | open, 2행부터 데이터. open 1=운영, 0=휴무
+ */
+function getCalendar() {
+  try {
+    var spreadsheet = getSpreadsheet();
+    var sheet = spreadsheet.getSheetByName("calendar");
+
+    if (!sheet) {
+      throw new Error("calendar 시트를 찾을 수 없습니다.");
+    }
+
+    var values = sheet.getDataRange().getValues();
+    if (!values.length || values.length < 2) {
+      return {
+        success: true,
+        data: [],
+      };
+    }
+
+    var headers = values[0].map(function (h) {
+      return String(h).trim().toLowerCase();
+    });
+    var dateIndex = headers.indexOf("date");
+    var openIndex = headers.indexOf("open");
+
+    if (dateIndex === -1 || openIndex === -1) {
+      throw new Error('calendar 시트 1행에 "date", "open" 열이 있어야 합니다.');
+    }
+
+    var rows = values.slice(1);
+    var out = [];
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      var dateCell = row[dateIndex];
+      var openCell = row[openIndex];
+
+      if (dateCell === "" || dateCell === null || dateCell === undefined) {
+        continue;
+      }
+
+      var dateKey = formatCalendarDateKey_(dateCell);
+      if (!dateKey) {
+        continue;
+      }
+
+      var openVal = Number(openCell);
+      if (isNaN(openVal)) {
+        openVal = openCell === true ? 1 : 0;
+      }
+
+      out.push({
+        date: dateKey,
+        open: openVal,
+      });
+    }
+
+    return {
+      success: true,
+      data: out,
+    };
+  } catch (error) {
+    Logger.log("getCalendar error: " + error.toString());
+    throw error;
+  }
+}
+
 function sendInquiry(data) {
   try {
     const { name, phone, inquiryType, message } = data;
@@ -316,6 +424,8 @@ function doGet(e) {
       result = getCurrent();
     } else if (action === "students") {
       result = getStudents();
+    } else if (action === "calendar") {
+      result = getCalendar();
     } else {
       result = {
         success: true,
