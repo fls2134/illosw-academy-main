@@ -10,6 +10,7 @@ import InquiryPage from "./routes/InquiryPage";
 import UnderConstruction from "./routes/UnderConstruction";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import PosterOverlay from "./components/PosterOverlay";
 import "./index.css";
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
   }
 
   return (
+    <>
     <div className="min-h-screen flex flex-col bg-white">
     <Routes>
         <Route
@@ -118,6 +120,8 @@ function App() {
         />
     </Routes>
     </div>
+    <PosterOverlay />
+    </>
   );
 }
 
